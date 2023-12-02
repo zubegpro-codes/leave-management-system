@@ -1,0 +1,85 @@
+{% extends 'main.html' %}
+
+{% block sidebar%}
+  {% include 'sidebar.html' %}
+{%endblock%}
+
+
+{% block content %}
+ <div class="container">
+        <h2>Leave Request Form</h2>
+        {% if messages %}
+          <ul class="messages">
+              {% for message in messages %}
+              <li>{{ message }}</li>
+              {% endfor %}
+          </ul>
+          {% endif %}
+        <form role="form" action="" method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="employeeID">Employee ID</label>
+                    {{form.employee_ID}}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    {{form.email}}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="phoneNumber">Phone Number</label>
+                    {{form.phoneNo}}
+                </div>
+
+                <div class="form-group">
+                    <label for="position">Position</label>
+                    {{form.position}}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="phoneNumber">Manager</label>
+                    {{form.manager}}
+                </div>
+                <div class="form-group">
+                    <label>Manager</label>
+                    {{form.manager_email}}
+                    
+                    <small class="form-text text-muted">Manager Email: example@example.com</small>
+                </div>
+            </div>
+ 
+            <div class="form-group">
+                <label for="leaveDetails">Title of Leave</label>
+                {{form.title}}
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="leaveStartDate">Leave Start Date</label>
+                    <div class="input-group">
+                        {{form.leave_start}}
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="leaveEndDate">Leave End Date</label>
+                    <div class="input-group">
+                        {{form.leave_end}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="leaveType">Leave Type</label>
+                {{form.leave_type}}
+                
+            </div>
+            <div class="form-group">
+                <label for="comments">Comments</label>
+                {{form.description}}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}

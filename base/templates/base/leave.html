@@ -1,0 +1,59 @@
+{% extends 'main.html'%}
+
+{% block sidebar%}
+  <div class="min-height-300 bg-primary position-absolute w-100">
+  </div>
+  {% include 'sidebar.html' %}
+{%endblock%}
+
+{% block content%}
+    {% include 'navbarLog.html' %}
+
+<li class="breadcrumb-item text-sm text-white active" aria-current="page">Leave Tables</li>
+
+
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Leave Application view</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                {% for leave in leaves%}
+                <div class="table align-items-center mb-0">
+                    
+                    <ul>
+                        <li>  {{leave.user.first_name}}</li>
+                        <li>  {{leave.user.last_name}}</li>
+                        <li> {{leave.email}}  </li>
+                        <li> {{leave.phoneNo}}  </li>
+                        <li> {{leave.position}}  </li>
+                        <li> {{leave.manager}}  </li>
+                        <li> {{leave.manager_email}}  </li>
+                        <li> {{leave.title}}  </li>
+                        <li> {{leave.leave_start}}  </li>
+                        <li> {{leave.leave_type}}  </li>
+                        <li> {{leave.description}}  </li>
+                        <li> {{leave.created}}  </li>                        
+                    </ul>
+                </div>
+                {%if request.user.is_staff or request.user.is_superuser %}
+                <div >
+                        <button class="btn Approved" style="color: green; margin: 0.5rem;"  data-leave="{{ leave.id }}" data-action="Approved" data-new-status="Approved">Approved</button>
+
+
+                        <button  class="btn Declined" style="color: red; margin: 0.5rem;"  data-leave="{{ leave.id }}" data-action="Declined" data-new-status="Declined">Declined</button>
+                </div>
+                {% endif %}
+                {%endfor%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+  
+    </div>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'main.html'%}
+
+{% block sidebar%}
+  <div class="min-height-300 bg-primary position-absolute w-100">
+  </div>
+  {% include 'sidebar.html' %}
+{%endblock%}
+
+{% block content%}
+    {% include 'navbar.html' %}
+{%block page_name%}
+<li class="breadcrumb-item text-sm text-white active" aria-current="page">Leave Tables</li>
+
+{%endblock%}
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Unapproved table</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Staff</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Office</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">leave status</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+                      <th class="text-secondary opacity-7"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%for leave in unapproved_leaves%}
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            {%if leave.user.avatar%}
+                            <img src="{{leave.user.avatar.url}}" class="avatar avatar-sm me-3" alt="user1">
+                            {%endif%}
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{leave.user.first_name}} {{leave.user.last_name}} ({{leave.user.username}} )  </h6>
+                            <p class="text-xs text-secondary mb-0">{{leave.email}}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="text-xs font-weight-bold mb-0">{{leave.position}}</p>
+                        <p class="text-xs text-secondary mb-0">{{leave.phoneNo}}</p>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="badge badge-sm bg-gradient-success">{{leave.status}}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{leave.created}}</span>
+                      </td>
+                      <td class="align-middle">
+                        <a href="{%url 'leave' leave.id %}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
+                      </td>
+                    </tr>
+                    {%endfor%}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Approved table</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center justify-content-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Staff</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Office</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Leave status</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Date</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%for leave in approved_leaves%}
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2">
+                          <div>
+                            {%if leave.user.avatar%}
+                            <img src="{{leave.user.avatar.url}}" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
+                            {%endif%}
+                          </div>
+                          <div class="my-auto">
+                            <h6 class="mb-0 text-sm">{{leave.user.first_name}} {{leave.user.last_name}} </h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="text-sm font-weight-bold mb-0">{{leave.position}}</p>
+                      </td>
+                      <td>
+                        <span class="text-xs font-weight-bold">{{leave.status}}</span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="badge badge-sm bg-gradient-success">Approved</span>
+                      </td>
+                      <td class="align-middle">
+                        <button class="btn btn-link text-secondary mb-0">
+                          <i class="fa fa-ellipsis-v text-xs"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    {%endfor%}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+{% endblock %}
